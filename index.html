@@ -10,28 +10,45 @@
   <style>
     :root{
       --red:#ef161f;
+      --red-dark:#c90f17;
       --ink:#171313;
-      --muted:#786e68;
+      --muted:#7a6f69;
       --cream:#f5efe8;
+      --cream-2:#eee4da;
+      --white:#ffffff;
       --line:#e9ddd4;
-      --white:#fff;
+      --shadow:0 28px 70px rgba(32,20,16,.14);
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       margin:0;
       min-height:100vh;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--ink);
       background:
-        radial-gradient(circle at 12% 8%,rgba(239,22,31,.10),transparent 28%),
-        radial-gradient(circle at 88% 82%,rgba(239,22,31,.08),transparent 26%),
-        linear-gradient(135deg,#fbf8f5 0%,var(--cream) 48%,#f9f5f1 100%);
+        radial-gradient(circle at 15% 10%, rgba(239,22,31,.10), transparent 28%),
+        radial-gradient(circle at 88% 82%, rgba(239,22,31,.08), transparent 24%),
+        linear-gradient(135deg,#faf7f3 0%,var(--cream) 48%,#f8f3ee 100%);
+      color:var(--ink);
       overflow-x:hidden;
     }
 
-    a{color:inherit;text-decoration:none}
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,
+    a{
+      -webkit-tap-highlight-color:transparent;
+    }
 
     .page{
       min-height:100vh;
@@ -47,82 +64,99 @@
       position:fixed;
       border-radius:999px;
       z-index:-1;
-      pointer-events:none;
+      filter:blur(2px);
+      opacity:.9;
     }
 
     .page::before{
-      width:340px;
-      height:340px;
-      top:-110px;
-      right:-110px;
+      width:320px;
+      height:320px;
       background:rgba(239,22,31,.07);
+      top:-90px;
+      right:-90px;
     }
 
     .page::after{
       width:260px;
       height:260px;
-      left:-90px;
-      bottom:-90px;
       background:rgba(23,19,19,.05);
+      bottom:-80px;
+      left:-70px;
     }
 
     header{
       width:min(1180px,calc(100% - 36px));
       margin:0 auto;
-      padding:24px 0 10px;
+      padding:26px 0 10px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
     }
 
-    .brand{display:flex;align-items:center;gap:12px}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
     .brand-mark{
       width:48px;
       height:48px;
-      flex:0 0 48px;
       border-radius:50%;
-      background:var(--red);
-      display:block;
       overflow:hidden;
-      border:4px solid rgba(255,255,255,.8);
+      display:grid;
+      place-items:center;
       box-shadow:0 10px 28px rgba(239,22,31,.22);
+      border:4px solid rgba(255,255,255,.72);
+      flex-shrink:0;
+      background:#fff;
     }
 
     .brand-mark img{
-      display:block;
       width:100%;
       height:100%;
-      max-width:100%;
-      max-height:100%;
       object-fit:cover;
-      object-position:center;
+      display:block;
     }
 
-    .brand-copy span,.brand-copy b{display:block}
-    .brand-copy span{font-size:10px;letter-spacing:.18em;font-weight:900;color:var(--red)}
-    .brand-copy b{font-size:20px;margin-top:1px;letter-spacing:-.03em}
+    .brand-copy span,
+    .brand-copy b{
+      display:block;
+    }
 
-    .domain-pill{
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(23,19,19,.07);
-      color:#6c625d;
+    .brand-copy span{
+      font-size:10px;
+      letter-spacing:.18em;
+      font-weight:900;
+      color:var(--red);
+    }
+
+    .brand-copy b{
+      font-size:20px;
+      margin-top:1px;
+      letter-spacing:-.03em;
+    }
+
+    .mini-link{
       font-size:12px;
       font-weight:800;
+      color:#6f645e;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(23,19,19,.07);
+      padding:10px 14px;
+      border-radius:999px;
       backdrop-filter:blur(10px);
     }
 
     main{
       width:min(1180px,calc(100% - 36px));
       margin:0 auto;
-      padding:44px 0 58px;
       display:grid;
       grid-template-columns:1.08fr .92fr;
-      gap:54px;
+      gap:56px;
       align-items:center;
+      padding:42px 0 56px;
     }
 
     .eyebrow{
@@ -137,35 +171,49 @@
       margin-bottom:16px;
     }
 
-    .eyebrow::before{content:"";width:26px;height:2px;border-radius:20px;background:var(--red)}
+    .eyebrow::before{
+      content:"";
+      width:26px;
+      height:2px;
+      background:var(--red);
+      border-radius:20px;
+    }
 
     h1{
-      font-size:clamp(54px,7.7vw,104px);
+      font-size:clamp(52px,7.8vw,104px);
       line-height:.9;
       letter-spacing:-.07em;
       margin:0;
+      max-width:760px;
     }
 
-    h1 .red{color:var(--red)}
+    h1 .red{
+      color:var(--red);
+    }
 
     .lead{
       font-size:clamp(17px,2vw,22px);
       line-height:1.55;
-      color:#655c57;
-      max-width:650px;
+      color:#665c57;
+      max-width:640px;
       margin:24px 0 0;
     }
 
-    .download-label{
+    .download-title{
       font-size:12px;
       font-weight:900;
-      text-transform:uppercase;
       letter-spacing:.11em;
+      text-transform:uppercase;
       color:#7c7069;
       margin-top:34px;
     }
 
-    .store-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .store-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:12px;
+    }
 
     .store-btn{
       min-width:224px;
@@ -174,39 +222,79 @@
       align-items:center;
       gap:13px;
       padding:11px 18px;
-      border-radius:17px;
       background:var(--ink);
       color:#fff;
-      border:1px solid rgba(255,255,255,.08);
+      border-radius:17px;
       box-shadow:0 16px 34px rgba(23,19,19,.17);
-      transition:transform .2s ease,box-shadow .2s ease;
+      transition:.2s ease;
+      border:1px solid rgba(255,255,255,.08);
     }
 
-    .store-btn:hover{transform:translateY(-3px);box-shadow:0 22px 42px rgba(23,19,19,.22)}
-    .store-btn.play{background:#fff;color:var(--ink);border-color:#e8ddd5}
-    .store-btn svg{width:31px;height:31px;flex:0 0 auto}
-    .store-btn small,.store-btn strong{display:block}
-    .store-btn small{font-size:10px;opacity:.72}
-    .store-btn strong{font-size:18px;margin-top:1px;letter-spacing:-.02em}
+    .store-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 22px 42px rgba(23,19,19,.22);
+    }
 
-    .perks{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+    .store-btn svg{
+      width:31px;
+      height:31px;
+      flex:0 0 auto;
+    }
+
+    .store-btn small,
+    .store-btn strong{
+      display:block;
+    }
+
+    .store-btn small{
+      font-size:10px;
+      opacity:.72;
+      letter-spacing:.02em;
+    }
+
+    .store-btn strong{
+      font-size:18px;
+      margin-top:1px;
+      letter-spacing:-.02em;
+    }
+
+    .store-btn.play{
+      background:#fff;
+      color:var(--ink);
+      border-color:#e8ddd5;
+    }
+
+    .perks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:24px;
+    }
+
     .perk{
       display:flex;
       align-items:center;
       gap:7px;
-      background:rgba(255,255,255,.72);
+      background:rgba(255,255,255,.7);
       border:1px solid rgba(23,19,19,.06);
       border-radius:999px;
       padding:8px 11px;
       font-size:11px;
       font-weight:800;
-      color:#655c57;
+      color:#665c57;
     }
-    .perk i{width:7px;height:7px;background:var(--red);border-radius:50%;display:block}
+
+    .perk i{
+      width:7px;
+      height:7px;
+      background:var(--red);
+      border-radius:50%;
+      display:block;
+    }
 
     .visual-wrap{
       position:relative;
-      min-height:610px;
+      min-height:600px;
       display:grid;
       place-items:center;
     }
@@ -222,15 +310,15 @@
     }
 
     .phone{
-      position:relative;
-      z-index:2;
       width:min(330px,76vw);
       aspect-ratio:9/19.4;
       background:#111;
       border-radius:46px;
       padding:10px;
       box-shadow:0 36px 80px rgba(15,10,8,.30);
+      position:relative;
       transform:rotate(-5deg);
+      z-index:2;
     }
 
     .phone::before{
@@ -243,7 +331,7 @@
       height:24px;
       background:#111;
       border-radius:999px;
-      z-index:4;
+      z-index:3;
     }
 
     .screen{
@@ -256,8 +344,9 @@
     }
 
     .screen-top{
-      min-height:210px;
-      padding:56px 24px 24px;
+      height:32%;
+      min-height:190px;
+      padding:54px 24px 24px;
       background:
         linear-gradient(180deg,rgba(23,19,19,.02),rgba(23,19,19,.08)),
         linear-gradient(145deg,#f2dfd0,#fff4ea);
@@ -270,9 +359,9 @@
       position:absolute;
       width:170px;
       height:170px;
+      border-radius:50%;
       right:-25px;
       bottom:-65px;
-      border-radius:50%;
       background:rgba(239,22,31,.14);
     }
 
@@ -280,19 +369,45 @@
       width:42px;
       height:42px;
       border-radius:50%;
-      background:var(--red);
-      color:#fff;
+      overflow:hidden;
+      background:#fff;
       display:grid;
       place-items:center;
-      font-size:11px;
-      font-weight:900;
       box-shadow:0 8px 20px rgba(239,22,31,.22);
+      position:relative;
+      z-index:2;
     }
 
-    .screen-top h3{font-size:26px;margin:18px 0 7px;letter-spacing:-.04em}
-    .screen-top p{margin:0;font-size:12px;color:#6f625a;line-height:1.5;max-width:210px}
+    .tiny-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
 
-    .screen-content{padding:18px;display:grid;gap:10px}
+    .screen-top h3{
+      font-size:26px;
+      margin:18px 0 7px;
+      letter-spacing:-.04em;
+      position:relative;
+      z-index:2;
+    }
+
+    .screen-top p{
+      margin:0;
+      font-size:12px;
+      color:#6f625a;
+      line-height:1.5;
+      max-width:210px;
+      position:relative;
+      z-index:2;
+    }
+
+    .screen-content{
+      padding:18px;
+      display:grid;
+      gap:10px;
+    }
 
     .screen-card{
       background:#fff;
@@ -315,15 +430,30 @@
       font-size:25px;
     }
 
-    .screen-card b,.screen-card span{display:block}
-    .screen-card b{font-size:12px;margin-bottom:3px}
-    .screen-card span{font-size:9px;color:#857972}
-    .screen-card strong{font-size:12px;color:var(--red)}
+    .screen-card b,
+    .screen-card span{
+      display:block;
+    }
+
+    .screen-card b{
+      font-size:12px;
+      margin-bottom:3px;
+    }
+
+    .screen-card span{
+      font-size:9px;
+      color:#857972;
+    }
+
+    .screen-card strong{
+      font-size:12px;
+      color:var(--red);
+    }
 
     .fake-cta{
       margin:3px 18px 0;
       background:var(--red);
-      color:#fff;
+      color:white;
       border-radius:15px;
       padding:14px;
       text-align:center;
@@ -344,128 +474,446 @@
       transform:rotate(3deg);
     }
 
-    .floating-note span,.floating-note b{display:block}
-    .floating-note span{font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--red)}
-    .floating-note b{font-size:14px;margin-top:3px}
+    .floating-note span,
+    .floating-note b{
+      display:block;
+    }
+
+    .floating-note span{
+      color:var(--red);
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.12em;
+    }
+
+    .floating-note b{
+      font-size:14px;
+      margin-top:3px;
+    }
 
     footer{
       width:min(1180px,calc(100% - 36px));
       margin:0 auto;
-      padding:22px 0 28px;
       border-top:1px solid rgba(23,19,19,.08);
+      padding:22px 0 28px;
       display:flex;
       justify-content:space-between;
       gap:18px;
       color:#81756f;
       font-size:11px;
     }
-    footer b{color:var(--ink)}
+
+    footer b{
+      color:var(--ink);
+    }
 
     @media(max-width:900px){
-      main{grid-template-columns:1fr;gap:18px;padding-top:34px}
-      .hero-copy{text-align:center}
-      .eyebrow{justify-content:center}
-      .lead{margin-left:auto;margin-right:auto}
-      .store-buttons,.perks{justify-content:center}
-      .visual-wrap{min-height:520px;margin-top:10px}
-      .red-panel{width:min(430px,86%);height:78%}
-      .floating-note{right:8%}
+      main{
+        grid-template-columns:1fr;
+        gap:18px;
+        padding-top:34px;
+      }
+
+      .hero-copy{
+        text-align:center;
+      }
+
+      .eyebrow{
+        justify-content:center;
+      }
+
+      .lead{
+        margin-left:auto;
+        margin-right:auto;
+      }
+
+      .store-buttons,
+      .perks{
+        justify-content:center;
+      }
+
+      .visual-wrap{
+        min-height:520px;
+        margin-top:10px;
+      }
+
+      .red-panel{
+        width:min(430px,86%);
+        height:78%;
+      }
+
+      .floating-note{
+        right:8%;
+      }
     }
 
     @media(max-width:560px){
-      header{padding-top:18px}
-      .domain-pill{display:none}
-      main{width:min(100% - 24px,1180px);padding-top:24px}
-      h1{font-size:58px}
-      .lead{font-size:16px}
-      .store-buttons{display:grid;grid-template-columns:1fr}
-      .store-btn{width:100%;min-width:0}
-      .visual-wrap{min-height:480px}
-      .phone{width:270px}
-      .floating-note{right:0;bottom:38px}
-      footer{width:min(100% - 24px,1180px);flex-direction:column;align-items:center;text-align:center}
+      header{
+        padding-top:18px;
+      }
+
+      .mini-link{
+        display:none;
+      }
+
+      main{
+        width:min(100% - 24px,1180px);
+        padding-top:24px;
+      }
+
+      h1{
+        font-size:58px;
+      }
+
+      .lead{
+        font-size:16px;
+      }
+
+      .store-buttons{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+        width:100%;
+      }
+
+      .store-btn{
+        width:100%;
+        min-width:0;
+        min-height:60px;
+        padding:9px 10px;
+        gap:8px;
+        border-radius:14px;
+        justify-content:center;
+      }
+
+      .store-btn svg{
+        width:25px;
+        height:25px;
+      }
+
+      .store-btn small{
+        font-size:8px;
+      }
+
+      .store-btn strong{
+        font-size:14px;
+      }
+
+      .perks{
+        gap:7px;
+      }
+
+      .perk{
+        font-size:10px;
+        padding:7px 9px;
+      }
+
+      .visual-wrap{
+        min-height:480px;
+      }
+
+      .phone{
+        width:270px;
+      }
+
+      .floating-note{
+        right:0;
+        bottom:38px;
+      }
+
+      footer{
+        width:min(100% - 24px,1180px);
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+    }
+
+    @media(max-width:370px){
+      .store-btn{
+        padding:8px 6px;
+        gap:5px;
+      }
+
+      .store-btn svg{
+        width:21px;
+        height:21px;
+      }
+
+      .store-btn small{
+        font-size:7px;
+      }
+
+      .store-btn strong{
+        font-size:12px;
+      }
     }
 
     @media(prefers-reduced-motion:no-preference){
-      .phone{animation:float 5s ease-in-out infinite}
+      .phone{
+        animation:float 5s ease-in-out infinite;
+      }
+
       @keyframes float{
-        0%,100%{transform:rotate(-5deg) translateY(0)}
-        50%{transform:rotate(-4deg) translateY(-10px)}
+        0%,100%{
+          transform:rotate(-5deg) translateY(0);
+        }
+
+        50%{
+          transform:rotate(-4deg) translateY(-10px);
+        }
       }
     }
   </style>
 </head>
+
 <body>
+
   <div class="page">
+
     <header>
+
       <a class="brand" href="#" aria-label="Chi-nito">
-        <div class="brand-mark"><img src="icon.png" alt="Logo Chi-nito"></div>
+
+        <div class="brand-mark">
+          <img src="icon.png" alt="Logo Chi-nito">
+        </div>
+
         <div class="brand-copy">
           <span>APP OFICIAL</span>
           <b>CHI-NITO</b>
         </div>
+
       </a>
-      <div class="domain-pill">descargar.chinito.com.mx</div>
+
+      <div class="mini-link">
+        descargar.chinito.com.mx
+      </div>
+
     </header>
 
     <main>
-      <section class="hero-copy">
-        <div class="eyebrow">Tu Chi-nito, más fácil</div>
-        <h1>Pide.<br>Recoge.<br><span class="red">Disfruta.</span></h1>
-        <p class="lead">Arma tu pedido, elige tu horario de pickup y sigue el estado de tu Chi-nito desde el celular.</p>
 
-        <div class="download-label">Descarga la app</div>
+      <section class="hero-copy">
+
+        <div class="eyebrow">
+          Tu Chi-nito, más fácil
+        </div>
+
+        <h1>
+          Pide.<br>
+          Recoge.<br>
+          <span class="red">Disfruta.</span>
+        </h1>
+
+        <p class="lead">
+          Arma tu pedido, elige tu horario de pickup y sigue el estado de tu Chi-nito desde el celular.
+        </p>
+
+        <div class="download-title">
+          Descarga la app
+        </div>
+
         <div class="store-buttons">
-          <a class="store-btn" href="https://apps.apple.com/mx/app/chi-nito/id6818643233" target="_blank" rel="noopener noreferrer" aria-label="Descargar Chi-nito en App Store">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+
+          <a
+            class="store-btn"
+            href="https://apps.apple.com/mx/app/chi-nito/id6818643233"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar Chi-nito en App Store"
+          >
+
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.79 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09ZM12.03 7.25C11.88 5.02 13.69 3.18 15.77 3c.29 2.58-2.34 4.5-3.74 4.25Z"/>
             </svg>
-            <span><small>Descárgala en</small><strong>App Store</strong></span>
+
+            <span>
+              <small>Descárgala en</small>
+              <strong>App Store</strong>
+            </span>
+
           </a>
 
-          <a class="store-btn play" href="https://play.google.com/store/apps/details?id=mx.chinito.app" target="_blank" rel="noopener noreferrer" aria-label="Descargar Chi-nito en Google Play">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#34A853" d="M3 2.4c-.47.54-.76 1.36-.76 2.42v14.36c0 1.06.29 1.88.76 2.42l.08.08 8.05-8.05v-.19L3.08 2.32 3 2.4Z"/>
-              <path fill="#4285F4" d="m13.83 16.34-2.7-2.7v-.19l2.7-2.7.06.04 3.2 1.82c.92.52.92 1.38 0 1.9l-3.2 1.82-.06.01Z"/>
-              <path fill="#FBBC04" d="m13.89 16.3-2.76-2.76L3 21.68c.74.78 1.97.88 3.36.09l7.53-4.28V16.3Z"/>
-              <path fill="#EA4335" d="M13.89 10.7 6.36 6.42C4.97 5.63 3.74 5.73 3 6.51l8.13 8.13 2.76-2.76V10.7Z" transform="translate(0 -4.19)"/>
+          <a
+            class="store-btn play"
+            href="https://play.google.com/store/apps/details?id=mx.chinito.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar Chi-nito en Google Play"
+          >
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                fill="#34A853"
+                d="M3 2.4c-.47.54-.76 1.36-.76 2.42v14.36c0 1.06.29 1.88.76 2.42l.08.08 8.05-8.05v-.19L3.08 2.32 3 2.4Z"
+              />
+
+              <path
+                fill="#4285F4"
+                d="m13.83 16.34-2.7-2.7v-.19l2.7-2.7.06.04 3.2 1.82c.92.52.92 1.38 0 1.9l-3.2 1.82-.06.01Z"
+              />
+
+              <path
+                fill="#FBBC04"
+                d="m13.89 16.3-2.76-2.76L3 21.68c.74.78 1.97.88 3.36.09l7.53-4.28V16.3Z"
+              />
+
+              <path
+                fill="#EA4335"
+                d="M13.89 10.7 6.36 6.42C4.97 5.63 3.74 5.73 3 6.51l8.13 8.13 2.76-2.76V10.7Z"
+                transform="translate(0 -4.19)"
+              />
+
             </svg>
-            <span><small>Disponible en</small><strong>Google Play</strong></span>
+
+            <span>
+              <small>Disponible en</small>
+              <strong>Google Play</strong>
+            </span>
+
           </a>
+
         </div>
 
         <div class="perks">
-          <div class="perk"><i></i> Solo pickup</div>
-          <div class="perk"><i></i> Pedidos programados</div>
-          <div class="perk"><i></i> Seguimiento en tiempo real</div>
+
+          <div class="perk">
+            <i></i>
+            Solo pickup
+          </div>
+
+          <div class="perk">
+            <i></i>
+            Pedidos programados
+          </div>
+
+          <div class="perk">
+            <i></i>
+            Seguimiento en tiempo real
+          </div>
+
         </div>
+
       </section>
 
-      <section class="visual-wrap" aria-label="Vista previa de la app Chi-nito">
+      <section class="visual-wrap">
+
         <div class="red-panel"></div>
+
         <div class="phone">
+
           <div class="screen">
+
             <div class="screen-top">
-              <div class="tiny-logo">CN</div>
-              <h3>Arma tu Chi-nito</h3>
-              <p>Elige tu base, guisados favoritos y recoge cuando te quede mejor.</p>
+
+              <div class="tiny-logo">
+                <img src="icon.png" alt="Logo Chi-nito">
+              </div>
+
+              <h3>
+                Arma tu Chi-nito
+              </h3>
+
+              <p>
+                Elige tu base, guisados favoritos y recoge cuando te quede mejor.
+              </p>
+
             </div>
+
             <div class="screen-content">
-              <div class="screen-card"><div class="food">🥡</div><div><b>Chi-nito 1</b><span>1 base + 1 guisado</span></div><strong>$95</strong></div>
-              <div class="screen-card"><div class="food">🍜</div><div><b>Chi-nito 2</b><span>1 base + 2 guisados</span></div><strong>$115</strong></div>
-              <div class="screen-card"><div class="food">🥢</div><div><b>Chi-nito 3</b><span>1 base + 3 guisados</span></div><strong>$135</strong></div>
+
+              <div class="screen-card">
+
+                <div class="food">
+                  🥡
+                </div>
+
+                <div>
+                  <b>Chi-nito 1</b>
+                  <span>1 base + 1 guisado</span>
+                </div>
+
+                <strong>
+                  +
+                </strong>
+
+              </div>
+
+              <div class="screen-card">
+
+                <div class="food">
+                  🍜
+                </div>
+
+                <div>
+                  <b>Chi-nito 2</b>
+                  <span>1 base + 2 guisados</span>
+                </div>
+
+                <strong>
+                  +
+                </strong>
+
+              </div>
+
+              <div class="screen-card">
+
+                <div class="food">
+                  🥢
+                </div>
+
+                <div>
+                  <b>Chi-nito 3</b>
+                  <span>1 base + 3 guisados</span>
+                </div>
+
+                <strong>
+                  +
+                </strong>
+
+              </div>
+
             </div>
-            <div class="fake-cta">Empezar pedido</div>
+
+            <div class="fake-cta">
+              Empezar pedido
+            </div>
+
           </div>
+
         </div>
-        <div class="floating-note"><span>APP OFICIAL</span><b>iPhone + Android</b></div>
+
+        <div class="floating-note">
+
+          <span>
+            APP OFICIAL
+          </span>
+
+          <b>
+            iPhone + Android
+          </b>
+
+        </div>
+
       </section>
+
     </main>
 
     <footer>
-      <span><b>CHI-NITO</b> · App oficial</span>
-      <span>Disponible para iOS y Android</span>
+
+      <span>
+        <b>CHI-NITO</b> · App oficial
+      </span>
+
+      <span>
+        Disponible para iOS y Android
+      </span>
+
     </footer>
+
   </div>
+
 </body>
 </html>
